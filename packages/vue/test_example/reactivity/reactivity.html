@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../dist/vue.js"></script>
+</head>
+<body>
+    
+    <h1 id="app">{{obj.name}}</h1>
+    <h1 id="aqq">{{obj.name}}</h1>
+    <h1 id="ass">{{obj.name}}</h1>
+    <script>
+        const { reactive,effect,ref,computed,watch } = MiniVue
+        const obj = ref({
+            name : "张三"
+        })
+        let str1 = ref('ssbb')
+        let str2 = ref(str1)
+        // let a = computed(()=>{return '汉字：'+str2.value})
+        watch(obj.value,(oldValue,newValue)=>{
+            console.log(obj.value.name)
+        },{
+            immediate:true
+        })
+        
+        effect(()=>{
+            document.querySelector('#app').innerHTML = obj.value.name
+        })
+        effect(()=>{
+            document.querySelector('#aqq').innerHTML = str2.value
+        })
+        // effect(()=>{
+        //     document.querySelector('#ass').innerHTML = a.value  
+        // })
+
+
+        setTimeout(()=>{obj.value.name='利津';str2.value="大聪明"},2000)
+    </script>
+</body>
+</html>

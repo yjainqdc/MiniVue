@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app"></div>
+    <div id="aqq"></div>
+    <div id="btn"></div>
+    <div id="com"></div>
+
+    <script>
+        const { h,render,reactive } = MiniVue
+        //const vnode = h('div',{class:'test'},[h('p','p1'),h('p','p2'),h('p','p3')])
+        //组件
+        const componet = {
+            setup(){
+                const obj = reactive({
+                    msg:'芜湖!'
+                })
+
+                setTimeout(()=>{
+                    obj.msg = '无敌！'
+                },2000)
+
+
+                //返回值得是个函数，也就是render
+                return () => h('div',obj.msg)
+            }
+        }
+        const componet2 = {
+            data(){
+                return{
+                    msg:'芜湖！这是一个新组件'
+                }
+            },
+            beforeCreate(){
+                console.log('bc')
+            },
+            created(){
+                console.log('c')
+            },
+            beforeMount(){
+                console.log('bm')
+            },
+            mounted(){
+                console.log(this.msg)
+            },
+            render(){
+                return h('div',this.msg)
+            }
+        }
+        // const vnode2 = h(componet)
+        // console.log(vnode2)
+        // const vnode = h('div','大葱命')
+        // render(vnode,document.querySelector('#app'))
+
+        // setTimeout(()=>{
+        //     // const vnode = h('Text',{class:'active',style:{fontSize:'99px'}},'鞑騘螟')
+        //     // render(vnode,document.querySelector('#app'))
+
+        //     // const vnode3 = h('button',{onDblClick:()=>{alert(222)}},'事件')
+        //     // render(vnode3,document.querySelector('#btn'))
+
+        //     //组件
+        //     const vnode4 = h(componet2)
+        //     render(vnode4,document.querySelector('#com'))
+
+        // },2000)
+
+        // const vnode2 = h('textarea',{value:'甘油'})
+        // render(vnode2,document.querySelector('#aqq'))
+
+        // const vnode3 = h('button',{onClick:()=>{alert(111)}},'事件')
+        // render(vnode3,document.querySelector('#btn'))
+
+        const vnode = h(componet)
+        render(vnode,document.querySelector('#com'))
+
+    </script>
+    <style>
+        .active{
+            color: brown;
+        }
+    </style>
+</body>
+</html>

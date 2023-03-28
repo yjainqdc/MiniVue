@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app"></div>
+    <div id="aqq"></div>
+    <div id="btn"></div>
+    <div id="com"></div>
+
+    <script> 
+        const { h,render,reactive,compile } = MiniVue
+        // v-if='isShow'
+        const template = `<div v-if="isShow"><h1>hello{{msg}}</h1></div>`
+        
+        const renderFn = compile(template)
+
+        //生成个组件,renderFn就相当于return(h('div',hello world))
+         const component = {
+              data(){
+                  return{
+                      msg:'world',
+                      isShow:true
+                  }
+              },
+              render:renderFn,
+              created() {
+                console.log('haihaihaihai')
+                setTimeout(() => {
+                    this.isShow = false
+                }, 2000);
+            }
+        }
+         const Vnode = h(component)
+         render(Vnode,document.querySelector('#app'))
+
+    </script>
+    <style>
+
+    </style>
+</body>
+</html>

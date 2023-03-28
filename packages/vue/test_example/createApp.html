@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app"></div>
+    <div id="aqq"></div>
+    <div id="btn"></div>
+    <div id="com"></div>
+
+    <script>
+        const { h,render,reactive,createApp,compile } = MiniVue
+
+
+        //构建组件实例
+        const App = {
+              data(){
+                  return{
+                      msg:'world',
+                      isShow:true
+                  }
+              },
+              template : `<div v-if="isShow"><h1>hello{{msg}}</h1></div>`,
+              created() {
+                console.log('haihaihaihai')
+                setTimeout(() => {
+                    this.isShow = false
+                }, 2000);
+            }
+        }
+        console.log(App)
+        const app = createApp(App)
+        app.mount('#app')
+ 
+    </script>
+    <style>
+
+    </style>
+</body>
+</html>
